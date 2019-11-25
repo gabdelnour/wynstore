@@ -15,31 +15,30 @@ class OrdersController < ApplicationController
     end 
 
     def create 
-        @cart = Cart.find(params[:cart_id])
         order = Order.new(order_params)
-        total = @cart.items.reduce(0) { |acc, item| acc + item.price.round(2) }
-        total = total.round(2)
-        cart = Cart.find(params[:cart_id])
+        cart = Cart.find_by(paid: false, id: params[:cart_id])
+        return redirect_to cart_path(params[:cart_id]) unless cart
         order.user = current_user
         order.cart = cart
-        order.total = total
-        Cart.create(user: current_user)
+        order.total = cart.total_price
         stripe_total = (order.total * 100).round(2).to_i 
+        customer = Stripe::Customer.create(
+            :email => 'some@guy.com',
+            :card  => params[:stripeToken]
+        )
+        charge = Stripe::Charge.create(
+            :customer => customer.id,
+            :amount => stripe_total,
+            :description => 'description',
+            :currency => 'usd'
+        )
 
-    customer = Stripe::Customer.create(
-        :email => 'some@guy.com',
-        :card  => params[:stripeToken]
-    )
-
-    charge = Stripe::Charge.create(
-        :customer => customer.id,
-        :amount => stripe_total,
-        :description => 'description',
-        :currency => 'usd'
-    )
-
-    redirect_to root_path if order.save
     
+        if order.save
+            Cart.create(user: current_user)
+            cart.update(paid: true)
+            redirect_to root_path 
+        end
     rescue Stripe::CardError => e
         flash[:error] = e.message 
         redirect_to charges_path

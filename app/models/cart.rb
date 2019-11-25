@@ -5,11 +5,7 @@ class Cart < ApplicationRecord
   has_many :items, through: :item_sizes
   has_one :order
 
-  def create
-    @cart = Cart.create()
-    @item = Item.find(params[:recipe_id])
-  end
-
-  def show
+  def total_price
+    items.map(&:price).sum
   end
 end

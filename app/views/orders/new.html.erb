@@ -19,10 +19,13 @@
             <td><strong>Grand Total:</strong> $<%= @total %></td>
         </tr>
     </table>
-
-       <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount=<%@total%>
-          data-locale="auto"></script>
+        <% if @cart.paid %>
+            <p>You already bought this! Reach out to customer support for fulfillment instructions</p>
+        <% else %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="A month's subscription"
+            data-amount=<%@total%>
+            data-locale="auto"></script>
+        <% end %>
 <% end %>
