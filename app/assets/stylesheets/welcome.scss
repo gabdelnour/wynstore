@@ -4,10 +4,9 @@
   grid-template-rows: repeat(4, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 365vh;
+  height: 350vh;
   font-family: 'Open Sans';	
   color: #44494A;
-  background-color: #A7D6F2;
 }
 
 .welcome-main-hero {
@@ -111,6 +110,7 @@
 
 .welcome-main-products {
   margin-bottom: 2em;
+  background-color: #FFF;
 }
 
 .welcome-main-products, .welcome-main-social {
@@ -123,40 +123,36 @@
   font-weight: 600;	
   letter-spacing: 0.1px;	
   line-height: 76px;
+  z-index: 1;
+  margin-bottom: 0;
 }
 
-#white-triange {
-  height: 300px;
-  width: 100vw;
-  background: #1c5c86;
-  color: #fff;
-  position: absolute;
+#triangle {
+  background-image: url('triangle.svg');
+  width: 100%;
+  height: 160%;
   z-index: -10;
-  text-align: center;
-}
-​
-.white-triange:after {
-  background: inherit;
-  bottom: 0;
-  content: '';
-  display: block;
-  height: 50%;
-  left: 0;
   position: absolute;
-  right: 0;
-  transform: skewY(-7.5deg);
-  transform-origin: 100%;
-  z-index: -10;
+  background-repeat: no-repeat;
 }
 
-// #white-triangle {
-  // align-self: flex-end;
-  // width: 0;
-  // height: 0;
-  // border-bottom: 30em solid red;
-  // border-left: 30em solid transparent;
-// }
+#background-logo {
+  width: 8em;
+  height:  8em;
+  z-index: -1;
+  position: absolute;
+  margin-top: 6em;
+  margin-left: -4em;
+}
 
+#background-shapes {
+  width: 9em;
+  z-index: -1;
+  position: absolute;
+  margin-top: 14em;
+  align-self: flex-end;
+  margin-left: 2em;
+}
 
 .products-tile, .social-title {
   text-align: center;	
@@ -165,17 +161,20 @@
   font-weight: 600;	
   letter-spacing: 0.1px;	
   line-height: 76px;
+  margin-bottom: 0;
 }
 
-.products-tiles > img {
+.products-tile > div > img {
+  width: 20%;
   padding-top: 20px;
   padding-bottom: 20px;
+  z-index: 5;
+
 }
 
 .welcome-main-social {
   height: 100vh;
-  background-color: #ffffff;
-
+  z-index: 1;
 }
 
 .welcome-main-social > div {
@@ -197,12 +196,12 @@
   justify-content: center;
   height: 50vh;  
   color: #173461;	
+  background-color: #A7D6F2;
 }
 
 .welcome-main-footer > div {
-  margin-top: 1.5em;
+  margin-top: 4em;
   margin-right: 3em;
-  margin-bottom: 1.5em;
 }
 
 .welcome-main-footer > div > p {
