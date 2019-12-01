@@ -1,0 +1,13 @@
+<%= link_to @order.user.email, admin_user_path(@order.user) %>
+<p><%= @order.user.profile.name%></p>
+<p><%= @order.user.profile.address%><%= @order.user.profile.city%>, <%= @order.user.profile.state%><%= @order.user.profile.zipcode%></p>
+<p><%= @order.user.profile.name%></p>
+
+<% @cart_items.each do |item|%>
+    <p>
+    <%= item.item_size.item.item_name %>
+    <%= item.item_size.size.size_name %>
+    </p>
+<%end%>
+    <%# Shipping Address %>
+    <%# Phone Number %>

@@ -68,3 +68,5 @@ This is a boilerplate Rails project that uses:
 
 ![](readme_assets/images/wynstore_erd.png)
 
+# URL
+"https://wynstore.herokuapp.com"
