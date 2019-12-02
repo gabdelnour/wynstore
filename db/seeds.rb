@@ -114,8 +114,12 @@ bag1= Item.create(
 )
 
 Item.all.each do |item|
+  if Item.category = !"Shirts" || !"Sweaters"
+    Size.all.each { |size| ItemSize.create(item_id: item.id, size_id: "Add to cart")}
+  else
   Size.all.each { |size| ItemSize.create(item_id: item.id, size_id: size.id) }
-end
+  end
+ end
 
 review1 = Review.create(
   rating: 5,
